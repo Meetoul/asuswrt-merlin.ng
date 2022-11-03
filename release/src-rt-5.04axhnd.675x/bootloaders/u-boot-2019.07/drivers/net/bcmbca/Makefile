@@ -78,7 +78,12 @@ obj-y += bcm_ethsw_ext.o bcm_ethsw_phy.o bcm_ethsw_phy_afe.o
 endif
 
 ifeq ($(or $(RTAX58U_V2),$(RTAX3000N)),y)
+ifneq ($(wildcard rtk/*.c),)
 obj-y += rtk/
+else
+obj-y += RTK_OBJS
+endif
+
 endif
 
 ifdef CONFIG_BCMBCA_PHY
