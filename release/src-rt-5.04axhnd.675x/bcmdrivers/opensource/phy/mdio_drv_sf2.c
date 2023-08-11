@@ -49,7 +49,6 @@ static int mdio_probe(dt_device_t *pdev)
 {
     int ret;
 
-
     switch_mdio_base = dt_dev_remap_resource(pdev, 0);
     if (IS_ERR(switch_mdio_base))
     {
@@ -58,10 +57,9 @@ static int mdio_probe(dt_device_t *pdev)
         dev_err(&pdev->dev, "Missing switch_mdio_base entry\n");
         goto Exit;
     }
-    dev_info(&pdev->dev, "switch_mdio_base=0x%lx\n", switch_mdio_base);
+    dev_dbg(&pdev->dev, "switch_mdio_base=0x%lx\n", switch_mdio_base);
 
 #if defined(CONFIG_BCM963138) || defined(CONFIG_BCM963148) || defined(CONFIG_BCM94908)
-    dev_info(&pdev->dev, "remap resource..\n");
     switch_reg_base = dt_dev_remap_resource(pdev, 1);
     if (IS_ERR(switch_reg_base))
     {
@@ -70,10 +68,10 @@ static int mdio_probe(dt_device_t *pdev)
         dev_err(&pdev->dev, "Missing switch_reg_base entry\n");
         goto Exit;
     }
-    dev_info(&pdev->dev, "switch_reg_base=0x%lx\n", switch_reg_base);
+    dev_dbg(&pdev->dev, "switch_reg_base=0x%lx\n", switch_reg_base);
 #endif
 
-    dev_info(&pdev->dev, " registered\n");
+    dev_info(&pdev->dev, "registered\n");
 
     return 0;
 
